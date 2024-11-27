@@ -1,5 +1,5 @@
 import React from "react";
-import backgroundImage from "../../assets/landingpageimage.png";
+import backgroundImage from "../../assets/tajmahal.jpg";
 import logo from '../../assets/logo.png';
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +19,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row md:min-h-screen bg-gradient-to-b from-teal-50 to-teal-100">
+    <div className="flex flex-col md:flex-row md:min-h-screen bg-gradient-to-b from-teal-50 to-teal-200">
       {/* Left Section */}
       <div
         className="md:flex-[1.5] bg-cover bg-center relative md:rounded-r-[50px] overflow-hidden min-h-[50vh] md:min-h-full"
@@ -35,12 +35,12 @@ const HomePage = () => {
 
       {/* Right Section */}
       <div className="flex-[1] flex justify-center items-center min-h-[50vh] md:min-h-full">
-        <div className="rounded-lg w-11/12 md:w-3/4 lg:w-3/5">
-          <h2 className="text-[36px] font-semibold mb-2 mt-10 text-center">
-            <button className="bg-none" onClick={handleLogin}>Login</button>
+        <div className="rounded-lg w-11/12 md:w-3/4 lg:w-3/5 flex flex-col gap-28">
+          <h2 className="text-[25px] font-semibold text-center">
+            <button className="bg-teal-400 text-white font-semibold rounded-md hover:bg-teal-500 transition p-2 w-32" onClick={handleLogin}>Login</button>
           </h2>
-          <h2 className="text-[36px] font-semibold mb-4 mt-2 text-center">
-            <button className="bg-none" onClick={handleSignup}>Signup</button>
+          <h2 className="text-[25px] font-semibold text-center">
+            <button className="bg-teal-400 text-white font-semibold rounded-md hover:bg-teal-500 transition p-2 w-32" onClick={handleSignup}>Signup</button>
           </h2>
         </div>
       </div>

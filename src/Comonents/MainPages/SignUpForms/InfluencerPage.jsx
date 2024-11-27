@@ -11,7 +11,7 @@ const InfluencerPage = ({
   handleInputChange,
   handleInfluencerType,
   handleNext,
-  handleBackStep
+  handleBackStep,
 }) => {
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ const InfluencerPage = ({
   // }
 
   return (
-    <div className="flex flex-col md:flex-row md:h-screen bg-gradient-to-b from-teal-50 to-teal-100">
+    <div className="flex flex-col md:flex-row md:h-screen bg-gradient-to-b from-teal-50 to-teal-200">
       {/* Left Section */}
       <div
         className="md:flex-[1.5] bg-cover bg-center relative md:rounded-r-[50px] overflow-hidden min-h-[50vh] md:min-h-full"
@@ -54,16 +54,17 @@ const InfluencerPage = ({
             and make <br />
             lifelong friends with adventurers from every corner of the world.
           </p>
-          <div className="flex justify-between items-center mt-8">
-            <span className="text-sm">02 — 03</span>
-            <div className="flex flex-col items-center space-y-2">
-              <div className="w-16 h-0.5 bg-white"></div> {/* Center line */}
-              <div className="flex space-x-6">
-                <span className="text-white">1</span>
-                <span className="text-white">2</span>
-                <span className="text-white">3</span>
-              </div>
+          <div className="flex items-center mt-8 space-x-4 w-[50%] gap-[30px]">
+            <div className="flex-1 relative">
+              <div className="w-full h-0.5 bg-gray-300"></div>{" "}
+              {/* Full horizontal line */}
+              <div
+                className="absolute top-0 left-0 h-0.5 bg-white"
+                style={{ width: "60%" }}
+              ></div>{" "}
+              {/* 30% filled portion */}
             </div>
+            <span className="text-sm">01 — 03</span>
           </div>
         </div>
       </div>
@@ -75,18 +76,22 @@ const InfluencerPage = ({
             Signing in
           </h2>
           <p className="flex justify-between items-center mt-4">
-            <span className="text-sm text-customBlack">
+            <span className=" text-customBlack">
               Are you an influencer?
             </span>
             <div className="space-x-2">
               <button
-                className={`py-1 px-4 ${formData.isInfluencer ? 'bg-teal-400' : 'bg-gray-300' } text-white rounded-lg hover:bg-teal-500 transition`}
+                className={`py-1 px-4 ${
+                  formData.isInfluencer ? "bg-teal-400" : "bg-gray-300"
+                } text-white rounded-lg hover:bg-teal-500 transition`}
                 onClick={() => handleInfluencerType(true)}
               >
                 Yes
               </button>
               <button
-                className={`py-1 px-4  ${!formData.isInfluencer ? 'bg-teal-400' : 'bg-gray-300' } text-customBlack rounded-lg hover:bg-gray-400 transition`}
+                className={`py-1 px-4  ${
+                  !formData.isInfluencer ? "bg-teal-400" : "bg-gray-300"
+                } text-customBlack rounded-lg hover:bg-gray-400 transition`}
                 onClick={() => handleInfluencerType(false)}
               >
                 No
@@ -112,26 +117,31 @@ const InfluencerPage = ({
                 className="w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack mt-3"
               />
               {formDataError.smLinkError && (
-                <p className="error">{formDataError.smLinkError}</p>
+                <p className="error text-left text-[#ff0000] text-sm">{formDataError.smLinkError}</p>
               )}
             </div>
           )}
-          <div className="flex">
+          <div className="flex justify-between">
             <button
               type="submit"
-              className="mt-5 mb-14 w-full py-2 bg-teal-400 text-[white] font-semibold rounded-lg hover:bg-teal-500 transition"
+              className="mt-5 w-[48%] py-2 border border-[#2DC6BE] bg-gradient text-teal-400 font-semibold rounded-lg hover:bg-teal-500 hover:text-white transition"
               onClick={handleBackStep}
             >
-              Back
+             {'<'} Back
             </button>
             <button
               type="submit"
-              className="mb-14 w-full py-2 bg-teal-400 text-[white] font-semibold rounded-lg hover:bg-teal-500 transition"
+              className="mt-5 w-[48%] py-2 bg-teal-400 text-[white] font-semibold rounded-lg hover:bg-teal-500 transition"
               onClick={handleNextStep2}
             >
               Next
             </button>
           </div>
+          {formData.isInfluencer && (
+          <div className="mt-3">
+            <p className="text-sm text-customBlack text-center text-semibold">Kindly provide your social links to verify your account as an Influencer!</p>
+          </div>
+          )}
         </div>
       </div>
     </div>

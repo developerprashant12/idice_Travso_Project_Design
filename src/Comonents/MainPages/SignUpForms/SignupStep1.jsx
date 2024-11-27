@@ -6,19 +6,24 @@ import Select from "react-select";
 import stateData from "../../../statedata/statedata.json";
 import { useNavigate } from "react-router-dom";
 import OTPInput from "react-otp-input";
-import { generateOtp, registerUser, verifyOtp } from "../../../redux/slices/authSlice";
+import {
+  generateOtp,
+  registerUser,
+  verifyOtp,
+} from "../../../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import "../DesignModule.css";
+
 const SignupStep1 = ({
   formData,
   formDataError,
   handleInputChange,
   handleSelectChange,
   handleNext,
-  validate
+  validate,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [showBoxes, setShowBoxes] = useState(false);
   const [otpVal, setOtpVal] = useState("");
   const [otpError, setOtpError] = useState("");
   const [showOTP, setShowOTP] = useState(false);
@@ -95,7 +100,7 @@ const SignupStep1 = ({
   //             } catch (error) {
   //               console.log("error in generate otp api", error);
   //             }
-              
+
   //           }
   //         } catch (error) {
   //           console.log("error in register api", error);
@@ -104,7 +109,7 @@ const SignupStep1 = ({
   //       } else {
   //         console.log("all data needed");
   //       }
-  //       return; 
+  //       return;
   //   } else {
   //       // const isVerified = true;
   //     console.log("====otpVal====>", otpVal.length);
@@ -140,14 +145,13 @@ const SignupStep1 = ({
   //   }
   // };
 
-
-  const handleNextStep1 = async() => {
-    if(!showOTP) {
-        const isValid = await validate();
-        // if(isValid) setShowOTP(true);
-        if(isValid) {
-          console.log("====formdata====>", formData);
-          try {
+  const handleNextStep1 = async () => {
+    if (!showOTP) {
+      const isValid = await validate();
+      // if(isValid) setShowOTP(true);
+      if (isValid) {
+        console.log("====formdata====>", formData);
+        try {
           //   const registerResult = await dispatch(registerUser(formData)).unwrap();
           // console.log("=======data=======>", registerResult);
 
@@ -160,16 +164,16 @@ const SignupStep1 = ({
           //   console.log("Something went wrong during register otp");
           // }
 
-          setShowOTP(true) // after button css, need to remove this and open api call
-          } catch (error) {
-            console.error("Error during registration or OTP generation:", error);
-          }
-        } else {
-          console.log("all data needed");
+          setShowOTP(true); // after button css, need to remove this and open api call
+        } catch (error) {
+          console.error("Error during registration or OTP generation:", error);
         }
-        return; 
+      } else {
+        console.log("all data needed");
+      }
+      return;
     } else {
-        // const isVerified = true;
+      // const isVerified = true;
       console.log("====otpVal====>", otpVal.length);
       if (otpVal.length !== 4) {
         setOtpError("*Enter all values");
@@ -177,30 +181,27 @@ const SignupStep1 = ({
       }
 
       try {
-      //   const verifyResult = await dispatch(verifyOtp({ mobileNumber: formData.mobileNumber, otp: otpVal })).unwrap();
-      //   console.log("=======verifyOtpDataJson======>", verifyResult);
+        //   const verifyResult = await dispatch(verifyOtp({ mobileNumber: formData.mobileNumber, otp: otpVal })).unwrap();
+        //   console.log("=======verifyOtpDataJson======>", verifyResult);
 
-      //  // if success clear otp value and move to next process
-      //   if (verifyResult) {
-      //     setOtpVal("");
-      //     // setIsOtpVerified(true); 
-      //     handleNext(); // go to influencer page
-      //   } else {
-      //     console.log("OTP verification failed");
-      //   }
+        //  // if success clear otp value and move to next process
+        //   if (verifyResult) {
+        //     setOtpVal("");
+        //     // setIsOtpVerified(true);
+        //     handleNext(); // go to influencer page
+        //   } else {
+        //     console.log("OTP verification failed");
+        //   }
 
-
-      // after button css done, remove this and open api
-          setOtpVal("");
-          handleNext(); // go to influencer page
-
+        // after button css done, remove this and open api
+        setOtpVal("");
+        handleNext(); // go to influencer page
       } catch (error) {
         console.log("OTP verification failed i am in catch block");
       }
       return;
     }
   };
-
 
   const handleOtpChange = (otp) => {
     setOtpError("");
@@ -210,15 +211,11 @@ const SignupStep1 = ({
   };
 
   return (
-    <div
-      className={`flex flex-col md:flex-row  bg-gradient-to-b from-teal-50 to-teal-100 ${
-        showBoxes ? "md:h-[120vh]" : "md:h-screen"
-      }`}
-    >
+    <div className="flex flex-col md:flex-row bg-gradient-to-b from-teal-50 to-teal-200 min-h-screen">
       {/* Left Section */}
 
       <div
-        className="md:flex-[1.5] bg-cover bg-center relative md:rounded-r-[50px] overflow-hidden min-h-[50vh] md:min-h-full"
+        className="md:flex-[1.5] bg-cover bg-center relative md:rounded-r-[50px] overflow-hidden h-[50vh] md:h-auto"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
         <div className="absolute top-8 left-8 md:top-12 md:left-12 md:ml-10">
@@ -247,28 +244,29 @@ const SignupStep1 = ({
             visuals. Let the beauty of these stories ignite your passion for
             adventure and set your soul on a journey to explore the unknown.
           </p>
-          <div className="flex justify-between items-center mt-8">
-            <span className="text-sm">01 — 03</span>
-            <div className="flex flex-col items-center space-y-2">
-              <div className="w-16 h-0.5 bg-white"></div> {/* Center line */}
-              <div className="flex space-x-6">
-                <span className="text-white">1</span>
-                <span className="text-white">2</span>
-                <span className="text-white">3</span>
-              </div>
+          <div className="flex items-center mt-8 space-x-4 w-[50%] gap-[30px]">
+            <div className="flex-1 relative">
+              <div className="w-full h-0.5 bg-gray-300"></div>{" "}
+              {/* Full horizontal line */}
+              <div
+                className="absolute top-0 left-0 h-0.5 bg-white"
+                style={{ width: "30%" }}
+              ></div>{" "}
+              {/* 30% filled portion */}
             </div>
+            <span className="text-sm">01 — 03</span>
           </div>
         </div>
       </div>
 
       {/* Right Section */}
-      <div className="flex-[1] flex justify-center items-center min-h-[50vh] md:min-h-full">
-        <div className="rounded-lg w-11/12 md:w-3/4 lg:w-3/5 mb-10 mt-10">
+      <div className="flex-[1] flex justify-center items-center h-auto min-h-[50vh] md:min-h-screen">
+        <div className="rounded-lg w-11/12 md:w-3/4 lg:w-3/5 md:mb-10 mt-10">
           <div>
             <h2 className="text-[36px] font-semibold mb-4 mt-2 text-center font-poppins text-customBlack">
               Sign Up
             </h2>
-            <form className="space-y-6" >
+            <form className="space-y-6">
               <div>
                 <input
                   type="text"
@@ -279,13 +277,15 @@ const SignupStep1 = ({
                   className="w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
                 />
                 {formDataError.fullName && (
-                  <p className="error">{formDataError.fullName}</p>
+                  <p className="error text-left text-[#ff0000] text-sm">
+                    {formDataError.fullName}
+                  </p>
                 )}
               </div>
               <div className="relative w-full">
                 <select
                   id="gender"
-                  className="appearance-none bg-white text-customGray w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+                  className="appearance-none bg-white text-customGray w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
                   defaultValue=""
                   name="gender"
                   value={formData.gender}
@@ -317,7 +317,9 @@ const SignupStep1 = ({
                   </svg>
                 </div>
                 {formDataError.gender && (
-                  <p className="error">{formDataError.gender}</p>
+                  <p className="error text-left text-[#ff0000] text-sm">
+                    {formDataError.gender}
+                  </p>
                 )}
               </div>
 
@@ -330,11 +332,13 @@ const SignupStep1 = ({
                     (option) => option.value === formData.state
                   )}
                   onChange={(option) => handleSelectChange(option, "state")}
-                  className="appearance-none bg-white text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+                  className="appearance-none bg-white text-[#364045] w-full p-[2px] border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
                   isSearchable
                 />
                 {formDataError.state && (
-                  <p className="error">{formDataError.state}</p>
+                  <p className="error text-left text-[#ff0000] text-sm">
+                    {formDataError.state}
+                  </p>
                 )}
               </div>
 
@@ -351,11 +355,13 @@ const SignupStep1 = ({
                   onChange={(option) => handleSelectChange(option, "city")}
                   isSearchable
                   isDisabled={!formData.state}
-                  className="appearance-none bg-white text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+                  className="appearance-none bg-white text-[#364045] w-full p-[2px] border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
                 />
 
                 {formDataError.city && (
-                  <p className="error">{formDataError.city}</p>
+                  <p className="error text-left text-[#ff0000] text-sm">
+                    {formDataError.city}
+                  </p>
                 )}
               </div>
 
@@ -366,10 +372,12 @@ const SignupStep1 = ({
                   name="dob"
                   value={formData.dob}
                   onChange={handleInputChange}
-                  className="text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+                  className="text-[#364045] w-full p-2 bg-white border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
                 />
                 {formDataError.dob && (
-                  <p className="error">{formDataError.dob}</p>
+                  <p className="error text-left text-[#ff0000] text-sm">
+                    {formDataError.dob}
+                  </p>
                 )}
               </div>
               <div>
@@ -382,7 +390,9 @@ const SignupStep1 = ({
                   className="text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
                 />
                 {formDataError.email && (
-                  <p className="error">{formDataError.email}</p>
+                  <p className="error text-left text-[#ff0000] text-sm">
+                    {formDataError.email}
+                  </p>
                 )}
               </div>
               <div>
@@ -395,22 +405,25 @@ const SignupStep1 = ({
                   className="text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
                 />
                 {formDataError.mobileNumber && (
-                  <p className="error">{formDataError.mobileNumber}</p>
+                  <p className="error text-left text-[#ff0000] text-sm">
+                    {formDataError.mobileNumber}
+                  </p>
                 )}
               </div>
 
               {showOTP && (
-                <div>
+                <div className="spaceuse">
                   <OTPInput
                     value={otpVal}
                     onChange={handleOtpChange}
                     numInputs={4}
-                    renderSeparator={<span>-</span>}
+                    renderSeparator={<span></span>}
                     renderInput={(props) => (
                       <input
                         {...props}
                         type="tel"
                         pattern="[0-9]*"
+                        className="otp-input w-12 h-12 sm:w-16 sm:h-12 md:w-16 md:h-12 text-center text-xl border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
                         onInput={(e) => {
                           if (!/^\d*$/.test(e.target.value)) {
                             e.target.value = ""; // Clear the value if it is not numeric
@@ -419,17 +432,16 @@ const SignupStep1 = ({
                       />
                     )}
                   />
-                  {otpError && <p className="error">{otpError}</p>}
+                  {otpError && (
+                    <p className="error text-left text-[#ff0000] text-sm">
+                      {otpError}
+                    </p>
+                  )}
                   <p>
                     Didn&apos;t receive a code?{" "}
-                    <strong
-                      style={{
-                        textDecoration: "underline",
-                        cursor: "pointer",
-                      }}
-                    >
+                    <span className="text-teal-600 hover:underline text-base">
                       Resend
-                    </strong>
+                    </span>
                   </p>
                 </div>
               )}
