@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "./Header";
 import ProfilePageHeaderData from "./ProfilePageHeaderData";
-import BuddiesSidebar from "./BuddiesSidebar";
-import BuddiesPostCard from "./BuddiesPostCard";
+import FollowingSidebar from "./FollowingSidebar";
+import FollowingPostCard from "./FollowingPostCard";
 
 const FollowingPage = () => {
   return (
@@ -31,11 +31,11 @@ const FollowingPage = () => {
         <div className="container mx-auto flex gap-5">
           {/* Main Content */}
           <div className="w-full">
-            <BuddiesPostCard />
+            <FollowingPostCard />
           </div>
           <div className="flex flex-col">
             {/* Sidebar */}
-            <BuddiesSidebar />
+            <FollowingSidebar />
           </div>
         </div>
       </div>
