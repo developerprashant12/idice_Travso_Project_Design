@@ -123,16 +123,16 @@ const handleSubmit = async(e) => {
       {/* Right Section */}
       <div className="flex-[1] flex justify-center items-center">
         <div className="rounded-lg w-11/12 md:w-3/4 lg:w-3/5">
-          <h2 className="text-[32px] font-semibold mb-4 mt-2 text-center">Login</h2>
+          <h2 className="font-poppins text-[36px] text-[#364045] font-semibold mb-4 mt-2 text-center">Login</h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
               <input
                 type="text"
                 name="username"
-                placeholder="User Name"
+                placeholder="Unique ID"
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+                className="font-sans w-full p-2 border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
               />
                   {formDataError.username && <p className="error text-left text-[#ff0000] text-sm">{formDataError.username}</p>}
             </div>
@@ -143,18 +143,18 @@ const handleSubmit = async(e) => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+                className="font-sans w-full p-2 border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
               />
               {formDataError.password && <p className="error text-left text-[#ff0000] text-sm">{formDataError.password}</p>}
             </div>
             <button
               type="submit"
-              className="mt-5 w-full py-2 bg-teal-400 text-[white] font-semibold rounded-md hover:bg-teal-500 transition"
+              className="font-roboto mt-5 w-full py-2 bg-teal-400 text-[white] font-semibold rounded-[12px] hover:bg-teal-500 transition"
             >
               Sign In
             </button>
           </form>
-          <p className="text-right mt-2 pb-10 md:pb-0 text-base">
+          <p className="font-roboto text-[16px] font-normal text-right mt-2 pb-10 md:pb-0 text-base">
             <Link
               className="text-teal-600 hover:underline"
               onClick={toggleForgotPassword}
@@ -162,7 +162,7 @@ const handleSubmit = async(e) => {
               Forgot Password?
             </Link>
           </p>
-          <p className="text-center mt-10 pb-10 md:pb-0 text-base">
+          <p className="font-roboto text-[16px] font-normal text-center mt-10 pb-10 md:pb-0 text-base">
             Don’t have an account? <Link to="/signup" className="text-teal-600 hover:underline">Signup</Link>
           </p>
         </div>
@@ -227,7 +227,7 @@ const handleSubmit = async(e) => {
                       />
                       <button
                         onClick={handleNext}
-                        className="mt-4 w-full py-2 bg-teal-400 text-white font-semibold rounded-md hover:bg-teal-500 transition"
+                        className="mt-4 w-full py-2 bg-teal-400 text-white font-semibold rounded-[12px] hover:bg-teal-500 transition"
                       >
                         Next
                       </button>
@@ -242,7 +242,7 @@ const handleSubmit = async(e) => {
                       />
                       <button
                         onClick={handleNext}
-                        className="mt-4 w-full py-2 bg-teal-400 text-white font-semibold rounded-md hover:bg-teal-500 transition"
+                        className="mt-4 w-full py-2 bg-teal-400 text-white font-semibold rounded-[12px] hover:bg-teal-500 transition"
                       >
                         Next
                       </button>
@@ -261,12 +261,12 @@ const handleSubmit = async(e) => {
                       maxLength="1"
                       value={value}
                       onChange={(e) => handleOtpChange(index, e.target.value)}
-                      className="w-10 h-10 text-center border border-[#2DC6BE] rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                      className="w-10 h-10 text-center border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
                     />
                   ))}
                   <button
                     onClick={handleVerify}
-                    className="mt-4 w-full py-2 bg-teal-400 text-white font-semibold rounded-md hover:bg-teal-500 transition"
+                    className="mt-4 w-full py-2 bg-teal-400 text-white font-semibold rounded-[12px] hover:bg-teal-500 transition"
                   >
                     Verify
                   </button>
@@ -280,18 +280,18 @@ const handleSubmit = async(e) => {
                     placeholder="Create Password"
                     value={createPassword}
                     onChange={(e) => setCreatePassword(e.target.value)}
-                    className="bg-white w-full p-2 mb-4 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                    className="bg-white w-full p-2 mb-4 border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
                   />
                   <input
                     type="password"
                     placeholder="Confirm Password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="bg-white w-full p-2 mb-4 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                    className="bg-white w-full p-2 mb-4 border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
                   />
                   <button
                     type="submit"
-                    className="mt-4 w-full py-2 bg-teal-400 text-white font-semibold rounded-md hover:bg-teal-500 transition"
+                    className="mt-4 w-full py-2 bg-teal-400 text-white font-semibold rounded-[12px] hover:bg-teal-500 transition"
                   >
                     Submit
                   </button>

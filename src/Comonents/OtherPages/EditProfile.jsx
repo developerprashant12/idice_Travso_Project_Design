@@ -1,176 +1,308 @@
 import React, { useState } from "react";
-import Header from "./Header";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
+import Icon from "../../assets/Icon.png";
+import Select from "react-select";
+import EditHeader from "./EditHeader";
+import "./EditProfile.css"
+
+const genderOptions = [
+  { value: "male", label: "Male" },
+  { value: "female", label: "Female" },
+  { value: "other", label: "Other" },
+];
+
+const cityOptions = [
+  { value: "new-york", label: "New York" },
+  { value: "london", label: "London" },
+  { value: "tokyo", label: "Tokyo" },
+];
+
+const customStyles = {
+  control: (base) => ({
+    ...base,
+    borderRadius: "8px",
+    padding: "2px 4px",
+    minHeight: "48px",
+    backgroundColor: "#F0F7F7",
+    border: "1px solid #d1d5db", // Light grey border
+    boxShadow: "none",
+    "&:hover": {
+      borderColor: "#93C5FD", // Blue on hover
+    },
+  }),
+  placeholder: (base) => ({
+    ...base,
+    color: "#869E9D",
+    fontSize: "16px",
+    fontWeight: "500",
+    fontFamily: "Inter, sans-serif",
+  }),
+  singleValue: (base) => ({
+    ...base,
+    fontSize: "16px",
+    fontFamily: "Inter, sans-serif",
+  }),
+  menu: (base) => ({
+    ...base,
+    borderRadius: "8px",
+    overflow: "hidden",
+  }),
+};
 
 const EditProfile = () => {
-  const [imageSrc, setImageSrc] = useState(null);
+  const [coverPhoto, setCoverPhoto] = useState(null);
+  const [profilePhoto, setProfilePhoto] = useState(null);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setImageSrc(reader.result); // Set the uploaded image as the source
+        setCoverPhoto(reader.result); // Set the uploaded image
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleImageDelete = () => {
-    setImageSrc(null); // Reset the uploaded image
+  const handleRemovePhoto = () => {
+    setCoverPhoto(null); // Remove the cover photo
+  };
+
+  const handleProfilePhotoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setProfilePhoto(reader.result); // Set the uploaded profile photo
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemoveProfilePhoto = () => {
+    setProfilePhoto(null); // Remove the profile photo
   };
 
   return (
     <>
-      <Header />
+      {/* Header Section */}
+      <EditHeader />
 
-      {/* Main Wrapper with Gradient Background */}
-      <div className="bg-gradient-to-b from-teal-50 to-teal-200 min-h-screen">
-        {/* Centered Heading */}
-        <h2 className="p-8 text-2xl font-bold text-black-400 text-center">
-          Profile Setup
-        </h2>
+      <div className="bg-[#F0F7F7] flex justify-center items-center min-h-screen">
+        <div className="w-full mt-12 rounded-[16px] mb-5 max-w-[1024px] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.1)] overflow-hidden p-[24px]">
+          {/* Title and Subtitle */}
+          <div className="text-center mb-8">
+            <h2 className="font-poppins text-[32px] font-semibold text-[#212626]">
+              Profile Setup
+            </h2>
+            <p className="font-inter font-medium text-[20px] text-[#667877]">
+              Fill important details to get started
+            </p>
+          </div>
 
-        <div className="flex items-center justify-center">
-          <div className="bg-white w-full max-w-[97%] rounded-lg relative mb-6 shadow-[0_4px_10px_rgba(0,0,0,0.25)]">
-            {/* Cover Photo Upload */}
-            <div className="relative bg-gray-100 border-0 border-dashed border-gray-300 rounded-lg h-[515px] flex justify-center items-center w-full">
-              <div className="flex-col">
-                <p className="text-gray-500 text-xl mb-2">
-                  <AttachFileIcon className="mr-2" /> Upload Cover Photo
-                  (optional)
-                </p>
-                <div className="flex items-center justify-center gap-x-2">
-                  {" "}
-                  {/* Use gap-x-2 for horizontal spacing */}
-                  <button className="bg-[#2DC6BE] text-white py-1 px-3 mb-2 rounded-lg">
-                    Upload Cover Photo
-                  </button>
-                  <button className="bg-red-500 text-white py-1 px-3 mb-2 rounded-lg">
-                    Delete
-                  </button>
+          {/* Form Section */}
+          <form className="w-[976px]">
+            {/* Cover Photo section */}
+            <div className="relative border-dashed border-2 border-[#F0F7F7] rounded-[10px] h-[320px] flex items-center justify-center bg-[#F0F7F7] mb-6 overflow-hidden group">
+              {coverPhoto ? (
+                <img
+                  src={coverPhoto}
+                  alt="Cover"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="flex flex-col items-center">
+                  <img src={Icon} alt="Placeholder" className="w-8 h-8 mb-2" />
+                  <span className="font-inter font-medium text-[16px] text-[#869E9D]">
+                    Upload Cover Photo (optional)
+                  </span>
                 </div>
-              </div>
-
-              {/* Profile Photo and Badge Overlap */}
-              <div className="absolute bottom-[-90px] left-16 bg-gray-100 border-2 border-gray-300 rounded-full h-56 w-56 flex justify-center items-center overflow-hidden group">
-                {/* Image or Default Placeholder */}
+              )}
+              {/* Buttons on hover */}
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <label
-                  htmlFor="profile-upload"
-                  className="relative w-full h-full cursor-pointer flex justify-center items-center"
+                  htmlFor="cover-upload"
+                  className="bg-[#2DC6BE] text-white py-2 px-4 rounded-lg cursor-pointer"
                 >
-                  {imageSrc ? (
-                    <img
-                      src={imageSrc}
-                      alt="Uploaded"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex flex-col justify-center items-center h-full text-gray-500">
-                      <AttachFileIcon className="mr-2" />
-                      <p>Upload Profile Photo</p>
-                    </div>
-                  )}
-
-                  {/* Hover Actions */}
-                  <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center text-white transition-opacity duration-300">
-                    <button
-                      className="bg-[#2DC6BE] text-white py-1 px-3 mb-2 rounded-full"
-                      onClick={() =>
-                        document.getElementById("profile-upload").click()
-                      }
-                    >
-                      Upload
-                    </button>
-                    <button
-                      className="bg-red-500 text-white py-1 px-3 rounded-full"
-                      onClick={handleImageDelete}
-                    >
-                      Delete
-                    </button>
-                  </div>
+                  Upload
                 </label>
-
-                {/* Hidden File Input */}
+                <button
+                  type="button"
+                  onClick={handleRemovePhoto}
+                  className="bg-red-500 text-white py-2 px-4 rounded-lg"
+                >
+                  Remove
+                </button>
                 <input
-                  id="profile-upload"
                   type="file"
-                  accept="image/*"
+                  id="cover-upload"
                   className="hidden"
+                  accept="image/*"
                   onChange={handleImageUpload}
                 />
               </div>
-
-              <button className="absolute bottom-[-20px] right-8 bg-[#2DC6BE] text-white py-2 px-10 rounded-md">
-                Add Badge*
-              </button>
             </div>
 
-            {/* Form Section */}
-            <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8 p-12">
+            {/* Profile Photo and Badge */}
+            <div className="flex justify-between items-center mb-6">
+              {/* Profile Photo Section */}
+              <div className="relative w-[220px] h-[220px] left-[64px] -top-[130px] rounded-full overflow-hidden border-[14px] border-[#FFFFFF] bg-[#F0F7F7] flex flex-col items-center justify-center group">
+                {profilePhoto ? (
+                  <img
+                    src={profilePhoto}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center">
+                    <img
+                      src={Icon}
+                      alt="Placeholder"
+                      className="w-8 h-8 mb-2"
+                    />
+                    <span className="font-inter font-medium text-[16px] text-[#869E9D]">
+                      Upload Profile Photo
+                    </span>
+                  </div>
+                )}
+                {/* Buttons on hover */}
+                <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <label
+                    htmlFor="profile-upload"
+                    className="bg-[#2DC6BE] text-white py-2 px-4 rounded-lg cursor-pointer"
+                  >
+                    Upload
+                  </label>
+                  <button
+                    type="button"
+                    onClick={handleRemoveProfilePhoto}
+                    className="bg-red-500 text-white py-2 px-4 rounded-lg"
+                  >
+                    Remove
+                  </button>
+                  <input
+                    type="file"
+                    id="profile-upload"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleProfilePhotoUpload}
+                  />
+                </div>
+              </div>
+
+              {/* Badge Selector */}
+              <div className="flex justify-center items-center">
+                <div className="relative right-[40px] -top-[130px] rounded-full border-[14px] border-[#FFFFFF] bg-[#F0F7F7] px-10 py-4 shadow-sm flex items-center">
+                  {/* Dropdown Select */}
+                  <select className="appearance-none bg-transparent text-[#667877] font-medium text-center w-full focus:outline-none cursor-pointer pr-4 custom-select">
+                    <option className="font-inter font-medium text-[16px] text-[#869E9D]">
+                      Select your Badge
+                    </option>
+                    <option className="font-inter font-medium text-[16px] text-[#869E9D]">
+                      Gold
+                    </option>
+                    <option className="font-inter font-medium text-[16px] text-[#869E9D]">
+                      Silver
+                    </option>
+                    <option className="font-inter font-medium text-[16px] text-[#869E9D]">
+                      Bronze
+                    </option>
+                  </select>
+
+                  {/* Centered Dropdown Icon */}
+                  <svg
+                    className="absolute top-1/2 right-8 transform -translate-y-1/2 pointer-events-none font-semibold"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="#667877"
+                    width="18"
+                    height="18"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Input Fields */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6 -mt-32">
+              {/* Full Name */}
               <div>
-                <label className="block text-gray-600 text-base font-medium mb-2 float-left">
-                  First Name
+                <label className="text-left font-inter block text-[#000000] mb-1 text-[14px] font-medium">
+                  Full Name
                 </label>
                 <input
                   type="text"
-                  placeholder="Your First Name"
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DC6BE] bg-gray-100 text-gray-500"
+                  placeholder="John Doe"
+                  className="rounded-[8px] px-4 py-2 w-full h-[48px] focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#F0F7F7] placeholder:text-[#869E9D] placeholder:font-inter placeholder:font-medium placeholder:text-[16px]"
                 />
               </div>
+
+              {/* Unique ID */}
               <div>
-                <label className="block text-gray-600 text-base font-medium mb-2 float-left">
-                  Last Name
+                <label className="text-left font-inter block text-[#000000] mb-1 text-[14px] font-medium">
+                  Unique ID
                 </label>
                 <input
                   type="text"
-                  placeholder="Your Last Name"
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DC6BE] bg-gray-100 text-gray-500"
+                  placeholder="john_doe_21"
+                  className="rounded-[8px] px-4 py-2 w-full h-[48px] focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#F0F7F7] placeholder:text-[#869E9D] placeholder:font-inter placeholder:font-medium placeholder:text-[16px]"
                 />
               </div>
+
+              {/* Gender */}
               <div>
-                <label className="block text-gray-600 text-base font-medium mb-2 float-left">
+                <label className="text-left font-inter block text-[#000000] mb-1 text-[14px] font-medium">
                   Gender
                 </label>
-                <select className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DC6BE] bg-gray-100 text-gray-500">
-                  <option>Your Gender</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                  <option>Other</option>
-                </select>
+                <Select
+                  options={genderOptions}
+                  placeholder="Choose your gender"
+                  styles={customStyles}
+                  classNamePrefix="custom"
+                  className="dataName"
+                />
               </div>
+
+              {/* City */}
               <div>
-                <label className="block text-gray-600 text-base font-medium mb-2 float-left">
+                <label className="text-left font-inter block text-[#000000] mb-1 text-[14px] font-medium">
                   City
                 </label>
-                <select className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DC6BE] bg-gray-100 text-gray-500">
-                  <option>Select City</option>
-                  <option>Indore</option>
-                  <option>Ratlam</option>
-                  <option>Ujjain</option>
-                </select>
+                <Select
+                  options={cityOptions}
+                  placeholder="Select your city"
+                  styles={customStyles}
+                  classNamePrefix="custom"
+                  className="dataName"
+                />
               </div>
             </div>
 
-            {/* Description Box */}
-            <div className="p-12">
-              <label className="block text-gray-600 text-base font-medium mb-2 float-left">
+            {/* Description */}
+            <div className="mb-6">
+              <label className="text-left font-inter block text-[#000000] mb-1 text-[14px] font-medium">
                 Description
               </label>
               <textarea
-                placeholder="Your Story in 50 words..."
-                rows="3"
-                className="bg-gray-100 text-gray-500 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DC6BE]"
+                placeholder="Your Story in few words..."
+                className="rounded-[8px] px-4 py-2 w-full h-[132px] focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#F0F7F7] placeholder:text-[#869E9D] placeholder:font-inter placeholder:font-medium placeholder:text-[16px]"
               ></textarea>
             </div>
 
-            {/* Save Button */}
-            <div className="p-10 text-center">
-              <button className="bg-[#2DC6BE] text-white py-2 px-10 rounded-md">
-                Save
-              </button>
-            </div>
-          </div>
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="mt-4 w-[234px] h-[53px] bg-[#2DC6BE] text-white py-3 px-4 rounded-[7px] hover:bg-[#2DC6BE] transition text-[16px] font-bold font-poppins"
+            >
+              Next
+            </button>
+          </form>
         </div>
       </div>
     </>

@@ -54,17 +54,17 @@ const AlmostPage = ({ formData, formDataError, handleInputChange, handleSubmit, 
                 className="absolute top-0 left-0 h-0.5 bg-white"
                 style={{ width: "100%" }}
               ></div>{" "}
-              {/* 30% filled portion */}
+              {/* 100% filled portion */}
             </div>
-            <span className="text-sm">01 — 03</span>
+            <span className="text-sm">03 — 03</span>
           </div>
         </div>
       </div>
 
       {/* Right Section */}
-      <div className="flex-[1] flex flex-col justify-center items-center min-h-[50vh] md:min-h-screen">
-        <div className="rounded-lg w-11/12 md:w-3/4 lg:w-3/5 mb-10 mt-10">
-          <h2 className="text-[36px] font-semibold mb-4 mt-2 text-center font-poppins text-customBlack">
+      <div className="flex-[1] flex flex-col items-center min-h-[50vh] md:min-h-screen">
+        <div className="rounded-lg w-11/12 md:w-3/4 lg:w-3/5 mb-10 mt-20">
+          <h2 className="font-poppins text-[36px] font-semibold mb-4 mt-2 text-center text-customBlack">
             Almost there
           </h2>
           <form className="space-y-6" onSubmit={testSubmit}>
@@ -72,25 +72,25 @@ const AlmostPage = ({ formData, formDataError, handleInputChange, handleSubmit, 
               <input
                 type="text"
                 name="userName"
-                placeholder="User Name"
+                placeholder="Unique ID"
                 value={formData?.userName || ""}
                 onChange={handleInputChange}
-                className="w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                className="w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
               />
               {formDataError.userName && <p className='error text-left text-[#ff0000] text-sm'>{formDataError.userName}</p>}
             </div>
 
-            <div>
+            {/* <div>
               <textarea
                 placeholder="Description"
                 name="description"
                 value={formData?.description || ""}
                 onChange={handleInputChange}
-                className="w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                className="w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
                 rows="4"
               ></textarea>
               {formDataError.description && <p className='error text-left text-[#ff0000] text-sm'>{formDataError.description}</p>}
-            </div>
+            </div> */}
 
             <div>
               <input
@@ -99,7 +99,7 @@ const AlmostPage = ({ formData, formDataError, handleInputChange, handleSubmit, 
                 value={formData?.password || ""}
                 onChange={handleInputChange}
                 placeholder="Create Password"
-                className="text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                className="text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
               />
               {formDataError.password && <p className='error text-left text-[#ff0000] text-sm'>{formDataError.password}</p>}
             </div>
@@ -111,21 +111,21 @@ const AlmostPage = ({ formData, formDataError, handleInputChange, handleSubmit, 
                 placeholder="Confirm Password"
                 value={formData?.confirmPassword || ""}
                 onChange={handleInputChange}
-                className="text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                className="text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
               />
               {formDataError.confirmPassword && <p className='error text-left text-[#ff0000] text-sm'>{formDataError.confirmPassword}</p>}
             </div>
             <div className="flex justify-between">
             <button
               type="submit"
-              className="mt-2 w-[48%] py-2 border border-[#2DC6BE] bg-gradient text-teal-400 font-semibold rounded-lg hover:bg-teal-500 hover:text-white transition"
+              className="font-roboto mt-2 w-[48%] py-2 border border-[#2DC6BE] bg-gradient text-teal-400 font-normal rounded-lg hover:bg-teal-500 hover:text-white transition"
               onClick={handleBackStep}
             >
              {'<'} Back
             </button>
             <button
               type="submit"
-              className="mt-2 w-[48%] py-2 bg-teal-400 text-[white] font-semibold rounded-lg hover:bg-teal-500 transition"
+              className="font-roboto mt-2 w-[48%] py-2 bg-teal-400 text-[white] font-normal rounded-lg hover:bg-teal-500 transition"
             >
               Create
             </button>

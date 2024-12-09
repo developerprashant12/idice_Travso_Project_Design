@@ -60,90 +60,6 @@ const SignupStep1 = ({
     navigate("/");
   };
 
-  // const handleNextStep1 = async() => {
-  //   if(!showOTP) {
-  //       const isValid = await validate();
-  //       // if(isValid) setShowOTP(true);
-  //       if(isValid) {
-  //         console.log("====formdata====>", formData);
-  //         try {
-  //           const response = await fetch("http://localhost:3000/api/signup", {
-  //             method: 'POST',
-  //             headers: {
-  //               'Content-Type': 'application/json'
-  //             },
-  //             body: JSON.stringify(formData)
-  //           });
-  //           console.log("response in register api", response);
-  //           if(response.ok) {
-  //             const  data  = await response.json();
-  //             console.log("=======data=======>", data);
-  //             // mobileNumber, otp, action
-  //             try {
-  //               const generateOtpResponse = await fetch("http://localhost:3000/api/otp", {
-  //                 method: 'POST',
-  //                 headers: {
-  //                   'Content-Type': 'application/json'
-  //                 },
-  //                 body: JSON.stringify({
-  //                   "mobileNumber": formData.mobileNumber,
-  //                   "action": "generate"
-  //                 })
-  //               })
-  //               const otpDataJson = await generateOtpResponse.json();
-  //               console.log("=======otpDataJson======>", otpDataJson);
-  //               if(generateOtpResponse.ok) {
-  //                 setShowOTP(true);
-  //               } else {
-  //                 console.log("error in generate otp")
-  //               }
-  //             } catch (error) {
-  //               console.log("error in generate otp api", error);
-  //             }
-
-  //           }
-  //         } catch (error) {
-  //           console.log("error in register api", error);
-  //         }
-
-  //       } else {
-  //         console.log("all data needed");
-  //       }
-  //       return;
-  //   } else {
-  //       // const isVerified = true;
-  //     console.log("====otpVal====>", otpVal.length);
-  //     if (otpVal.length !== 4) {
-  //       setOtpError("*Enter all values");
-  //       return;
-  //     }
-
-  //     try {
-  //       const verifyOtpResponse = await fetch("http://localhost:3000/api/otp", {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json'
-  //         },
-  //         body: JSON.stringify({
-  //           "mobileNumber": formData.mobileNumber,
-  //           "otp": otpVal,
-  //           "action": "verify"
-  //         })
-  //       })
-
-  //       const verifyOtpDataJson = await verifyOtpResponse.json();
-  //       if(verifyOtpResponse.ok) {
-  //         console.log("=======verifyOtpDataJson======>", verifyOtpDataJson);
-  //         setOtpVal("");
-  //         handleNext();
-
-  //       }
-  //     } catch (error) {
-  //       console.log("error in verify otp api", error);
-  //     }
-  //     return;
-  //   }
-  // };
 
   const handleNextStep1 = async () => {
     if (!showOTP) {
@@ -266,7 +182,7 @@ const SignupStep1 = ({
             <h2 className="text-[36px] font-semibold mb-4 mt-2 text-center font-poppins text-customBlack">
               Sign Up
             </h2>
-            <form className="space-y-6">
+            <form className="space-y-5">
               <div>
                 <input
                   type="text"
@@ -274,7 +190,7 @@ const SignupStep1 = ({
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleInputChange}
-                  className="w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                  className="w-full p-2 border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
                 />
                 {formDataError.fullName && (
                   <p className="error text-left text-[#ff0000] text-sm">
@@ -285,7 +201,7 @@ const SignupStep1 = ({
               <div className="relative w-full">
                 <select
                   id="gender"
-                  className="appearance-none bg-white text-customGray w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                  className="appearance-none bg-white text-customGray w-full p-2 border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
                   defaultValue=""
                   name="gender"
                   value={formData.gender}
@@ -332,7 +248,7 @@ const SignupStep1 = ({
                     (option) => option.value === formData.state
                   )}
                   onChange={(option) => handleSelectChange(option, "state")}
-                  className="appearance-none bg-white text-[#364045] w-full p-[2px] border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                  className="appearance-none bg-white text-[#364045] w-full p-[2px] border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
                   isSearchable
                 />
                 {formDataError.state && (
@@ -355,7 +271,7 @@ const SignupStep1 = ({
                   onChange={(option) => handleSelectChange(option, "city")}
                   isSearchable
                   isDisabled={!formData.state}
-                  className="appearance-none bg-white text-[#364045] w-full p-[2px] border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                  className="appearance-none bg-white text-[#364045] w-full p-[2px] border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
                 />
 
                 {formDataError.city && (
@@ -372,7 +288,7 @@ const SignupStep1 = ({
                   name="dob"
                   value={formData.dob}
                   onChange={handleInputChange}
-                  className="text-[#364045] w-full p-2 bg-white border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                  className="text-[#364045] w-full p-2 bg-white border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
                 />
                 {formDataError.dob && (
                   <p className="error text-left text-[#ff0000] text-sm">
@@ -387,7 +303,7 @@ const SignupStep1 = ({
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                  className="text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
                 />
                 {formDataError.email && (
                   <p className="error text-left text-[#ff0000] text-sm">
@@ -402,7 +318,7 @@ const SignupStep1 = ({
                   value={formData.mobileNumber}
                   name="mobileNumber"
                   onChange={handleInputChange}
-                  className="text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-poppins placeholder:text-customBlack"
+                  className="text-[#364045] w-full p-2 border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400 placeholder:font-sans placeholder:font-normal placeholder:text-customBlack placeholder:text-[16px]"
                 />
                 {formDataError.mobileNumber && (
                   <p className="error text-left text-[#ff0000] text-sm">
@@ -423,7 +339,7 @@ const SignupStep1 = ({
                         {...props}
                         type="tel"
                         pattern="[0-9]*"
-                        className="otp-input w-12 h-12 sm:w-16 sm:h-12 md:w-16 md:h-12 text-center text-xl border border-[#2DC6BE] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+                        className="otp-input w-12 h-12 sm:w-16 sm:h-12 md:w-16 md:h-12 text-center text-xl border border-[#2DC6BE] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-teal-400"
                         onInput={(e) => {
                           if (!/^\d*$/.test(e.target.value)) {
                             e.target.value = ""; // Clear the value if it is not numeric
@@ -437,9 +353,9 @@ const SignupStep1 = ({
                       {otpError}
                     </p>
                   )}
-                  <p>
+                  <p className="mt-3 text-left text-[#454F5A] text-[14px] font-inter font-normal">
                     Didn&apos;t receive a code?{" "}
-                    <span className="text-teal-600 hover:underline text-base">
+                    <span className="text-[16px] text-teal-600 hover:underline text-base font-semibold">
                       Resend
                     </span>
                   </p>
@@ -447,7 +363,7 @@ const SignupStep1 = ({
               )}
               <button
                 type="button"
-                className="mt-5 w-full py-2 bg-teal-400 text-[white] font-semibold rounded-md hover:bg-teal-500 transition"
+                className="mt-5 w-full py-2 bg-teal-400 text-[white] font-semibold rounded-[12px] hover:bg-teal-500 transition"
                 onClick={handleNextStep1}
               >
                 Next

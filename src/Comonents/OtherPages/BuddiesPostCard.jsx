@@ -1,294 +1,226 @@
 import React, { useState } from "react";
-import Girl from "../../assets/headerIcon/girl.jpg";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import starBadges from "../../assets/InfluencerBadge.png";
 
 const BuddiesPostCard = () => {
-  const [activeButton, setActiveButton] = useState("buddies");
+  const [buddyStates, setBuddyStates] = useState({});
+  const [buddyFollow, setBuddyFollow] = useState({});
+  const [isInfluencerbuddyStates, setIsInfluencerBuddyStates] = useState({});
+  const [isInfluencerbuddyFollow, setIsInfluencerBuddyFollow] = useState({});
 
-  const toggleSection = (buttonName) => {
-    setActiveButton(activeButton === buttonName ? null : buttonName);
+  const handleAddBuddyClick = (index) => {
+    setBuddyStates((prevStates) => ({
+      ...prevStates,
+      [index]: !prevStates[index], // Toggle the state for the specific button
+    }));
   };
 
-  const isSectionVisible = (buttonName) => activeButton === buttonName;
+  const handleFollowBuddyClick = (index) => {
+    setBuddyFollow((prevStates) => ({
+      ...prevStates,
+      [index]: !prevStates[index], // Toggle the state for the specific button
+    }));
+  };
+
+  const handleIsInfluencerAddBuddyClick = (index) => {
+    setIsInfluencerBuddyStates((prevStates) => ({
+      ...prevStates,
+      [index]: !prevStates[index], // Toggle the state for the specific button
+    }));
+  };
+
+  const handleIsInfluencerFollowBuddyClick = (index) => {
+    setIsInfluencerBuddyFollow((prevStates) => ({
+      ...prevStates,
+      [index]: !prevStates[index], // Toggle the state for the specific button
+    }));
+  };
+
+  const BuddiesData = [
+    {
+      name: "Madhulika Sharma",
+      username: "@Madhu.lika",
+      trips: 252,
+      description:
+        "Adipiscing sapien felis in semper porttitor massa senectus nunc. Non ac cursus nisl luctus diam dignissim. Cras tincidunt etiam morbi egestas.",
+      role: "Solo Traveler",
+      isInfluencer: 0,
+    },
+    // Add 8 more objects like the above
+    {
+      name: "Rohit Verma",
+      username: "@rohit.verma",
+      trips: 180,
+      description:
+        "Adipiscing sapien felis in semper porttitor massa senectus nunc. Non ac cursus nisl luctus diam dignissim. Cras tincidunt etiam morbi egestas.",
+      role: "Adventure Seeker",
+      isInfluencer: 0,
+    },
+    {
+      name: "Anjali Singh",
+      username: "@anjali.singh",
+      trips: 320,
+      description:
+        "Adipiscing sapien felis in semper porttitor massa senectus nunc. Non ac cursus nisl luctus diam dignissim. Cras tincidunt etiam morbi egestas.",
+      role: "Globetrotter",
+      isInfluencer: 1,
+    },
+    {
+      name: "Rajesh Kapoor",
+      username: "@rajesh.kapoor",
+      trips: 150,
+      description:
+        "Adipiscing sapien felis in semper porttitor massa senectus nunc. Non ac cursus nisl luctus diam dignissim. Cras tincidunt etiam morbi egestas.",
+      role: "Cultural Enthusiast",
+      isInfluencer: 0,
+    },
+    {
+      name: "Sana Malik",
+      username: "@sana.malik",
+      trips: 240,
+      description:
+        "Adipiscing sapien felis in semper porttitor massa senectus nunc. Non ac cursus nisl luctus diam dignissim. Cras tincidunt etiam morbi egestas.",
+      role: "Photographer",
+      isInfluencer: 1,
+    },
+    {
+      name: "Neha Gupta",
+      username: "@neha.gupta",
+      trips: 200,
+      description:
+        "Adipiscing sapien felis in semper porttitor massa senectus nunc. Non ac cursus nisl luctus diam dignissim. Cras tincidunt etiam morbi egestas.",
+      role: "Foodie Traveler",
+      isInfluencer: 0,
+    },
+    {
+      name: "Kabir Khanna",
+      username: "@kabir.khanna",
+      trips: 180,
+      description:
+        "Adipiscing sapien felis in semper porttitor massa senectus nunc. Non ac cursus nisl luctus diam dignissim. Cras tincidunt etiam morbi egestas.",
+      role: "Explorer",
+      isInfluencer: 0,
+    },
+    {
+      name: "Priya Desai",
+      username: "@priya.desai",
+      trips: 270,
+      description:
+        "Adipiscing sapien felis in semper porttitor massa senectus nunc. Non ac cursus nisl luctus diam dignissim. Cras tincidunt etiam morbi egestas.",
+      role: "Nature Lover",
+      isInfluencer: 0,
+    },
+    {
+      name: "Amitabh Reddy",
+      username: "@amitabh.reddy",
+      trips: 290,
+      description:
+        "Adipiscing sapien felis in semper porttitor massa senectus nunc. Non ac cursus nisl luctus diam dignissim. Cras tincidunt etiam morbi egestas.",
+      role: "Wildlife Traveler",
+      isInfluencer: 0,
+    },
+  ];
 
   return (
     <>
-      <div className="mb-4">
-        <div className="flex items-center justify-between">
-          <button
-            className={`px-32 py-2 rounded-full ${
-              activeButton === "following"
-                ? "bg-[#2DC6BE] text-white"
-                : "bg-[#EEF0F2] text-[#415365] hover:bg-[#2DC6BE] hover:text-white"
-            }`}
-            onClick={() => toggleSection("following")}
-          >
-            Following
-          </button>
-          <button
-            className={`px-32 py-2 rounded-full ${
-              activeButton === "followers"
-                ? "bg-[#2DC6BE] text-white"
-                : "bg-[#EEF0F2] text-[#415365] hover:bg-[#2DC6BE] hover:text-white"
-            }`}
-            onClick={() => toggleSection("followers")}
-          >
-            Followers
-          </button>
-          <button
-            className={`px-32 py-2 rounded-full ${
-              activeButton === "buddies"
-                ? "bg-[#2DC6BE] text-white"
-                : "bg-[#EEF0F2] text-[#415365] hover:bg-[#2DC6BE] hover:text-white"
-            }`}
-            onClick={() => toggleSection("buddies")}
-          >
-            Buddies
-          </button>
-        </div>
-      </div>
-
-      {/*------------------------ Full Button Section -----------------------*/}
-      {["following", "followers", "buddies"].map((section) => (
-        <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {BuddiesData.map((profile, index) => (
           <div
-            key={section}
-            className="bg-white rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.25)] p-4 mb-4"
+            key={index}
+            className="bg-white relative rounded-[16px] shadow-[0_4px_10px_rgba(0,0,0,0.15)] p-4 mb-4"
           >
-            <button
-              className="flex items-center justify-between w-full px-4 py-2 rounded-lg text-[#415365] bg-[#EEF0F2] hover:bg-[#2DC6BE] hover:text-white"
-              onClick={() => toggleSection(section)}
-            >
-              {section.charAt(0).toUpperCase() + section.slice(1)} (57)
-              {isSectionVisible(section) ? (
-                <KeyboardArrowUpIcon />
-              ) : (
-                <KeyboardArrowDownIcon />
-              )}
-            </button>
-          </div>
-          {isSectionVisible(section) && (
-            <div className="bg-white rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.25)] p-4 mb-4 mt-4">
-              <div className="flex-col mb-5 border-b border-b-gray-400">
-                <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={Girl}
-                    alt={Girl}
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <div className="flex flex-1 items-center justify-between">
-                    {/* Left Content */}
-                    <div className="flex flex-col">
-                      <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold text-left">
-                          Madhulika Sharma
-                        </h3>
-                      </div>
+            <img
+              src="https://via.placeholder.com/400x150"
+              alt="Background"
+              className="w-full h-[80px] object-cover rounded-[12px]"
+            />
+            {profile.isInfluencer === 1 && (
+              <img
+                src={starBadges}
+                alt={starBadges}
+                class="absolute top-[16px] left-[16px] w-[64px] h-[64px] rounded-t-[12px]"
+              ></img>
+            )}
 
-                      {/* Time */}
-                      <p className="flex items-center gap-3 text-sm text-gray-500 text-left">
-                        <span>@Madhu.lika</span>
-                        <span>12kFollowers</span>
-                        <span>252 Trips</span>
-                      </p>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <button className="w-[90px] px-3 py-2 text-sm font-semibold border-2 rounded-lg font-semibold bg-[#2DC6BE] text-white border-[#2DC6BE] text-[#2DC6BE] border-[#2DC6BE]">
-                        Follow
-                      </button>
-                      <button className="px-3 py-2 text-sm font-semibold border-2 rounded-lg font-semibold bg-[#2DC6BE] text-white border-[#2DC6BE] text-[#2DC6BE] border-[#2DC6BE]">
-                        +
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <p className="mb-4 text-left">
-                    Adipiscing sapien felis in semper porttitor massa senectus
-                    nunc. Non ac cursus nisl luctus diam dignissim. Cras
-                    tincidunt etiam morbi egestas. Adipiscing sapien felis in
-                    semper porttitor massa senectus nunc. Adipiscing sapien
-                    felis in semper porttitor massa senectus nunc.
-                  </p>
-                </div>
-              </div>
-              <div className="flex-col mb-8 border-b border-b-gray-400">
-                <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={Girl}
-                    alt={Girl}
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <div className="flex flex-1 items-center justify-between">
-                    {/* Left Content */}
-                    <div className="flex flex-col">
-                      <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold text-left">
-                          Madhulika Sharma
-                        </h3>
-                      </div>
-
-                      {/* Time */}
-                      <p className="flex items-center gap-3 text-sm text-gray-500 text-left">
-                        <span>@Madhu.lika</span>
-                        <span>12kFollowers</span>
-                        <span>252 Trips</span>
-                      </p>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <button className="w-[90px] px-3 py-2 text-sm font-semibold border-2 rounded-lg font-semibold border-[#2DC6BE] text-[#2DC6BE] border-[#2DC6BE]">
-                        Following
-                      </button>
-                      <button className="px-3 py-2 text-sm font-semibold border-2 rounded-lg font-semibold border-[#2DC6BE] text-[#2DC6BE] border-[#2DC6BE]">
-                        -
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <p className="mb-4 text-left">
-                    Adipiscing sapien felis in semper porttitor massa senectus
-                    nunc. Non ac cursus nisl luctus diam dignissim. Cras
-                    tincidunt etiam morbi egestas. Adipiscing sapien felis in
-                    semper porttitor massa senectus nunc. Adipiscing sapien
-                    felis in semper porttitor massa senectus nunc.
-                  </p>
-                </div>
-              </div>
-              <div className="flex-col mb-8 border-b border-b-gray-400">
-                <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={Girl}
-                    alt={Girl}
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <div className="flex flex-1 items-center justify-between">
-                    {/* Left Content */}
-                    <div className="flex flex-col">
-                      <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold text-left">
-                          Madhulika Sharma
-                        </h3>
-                      </div>
-
-                      {/* Time */}
-                      <p className="flex items-center gap-3 text-sm text-gray-500 text-left">
-                        <span>@Madhu.lika</span>
-                        <span>12kFollowers</span>
-                        <span>252 Trips</span>
-                      </p>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <button className="w-[90px] px-3 py-2 text-sm font-semibold border-2 rounded-lg font-semibold border-[#2DC6BE] text-[#2DC6BE] border-[#2DC6BE]">
-                        Following
-                      </button>
-                      <button className="px-3 py-2 text-sm font-semibold border-2 rounded-lg font-semibold border-[#2DC6BE] text-[#2DC6BE] border-[#2DC6BE]">
-                        -
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <p className="mb-4 text-left">
-                    Adipiscing sapien felis in semper porttitor massa senectus
-                    nunc. Non ac cursus nisl luctus diam dignissim. Cras
-                    tincidunt etiam morbi egestas. Adipiscing sapien felis in
-                    semper porttitor massa senectus nunc. Adipiscing sapien
-                    felis in semper porttitor massa senectus nunc.
-                  </p>
-                </div>
-              </div>
-              <div className="flex-col mb-5 border-b border-b-gray-400">
-                <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={Girl}
-                    alt={Girl}
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <div className="flex flex-1 items-center justify-between">
-                    {/* Left Content */}
-                    <div className="flex flex-col">
-                      <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold text-left">
-                          Madhulika Sharma
-                        </h3>
-                      </div>
-
-                      {/* Time */}
-                      <p className="flex items-center gap-3 text-sm text-gray-500 text-left">
-                        <span>@Madhu.lika</span>
-                        <span>12kFollowers</span>
-                        <span>252 Trips</span>
-                      </p>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <button className="w-[90px] px-3 py-2 text-sm font-semibold border-2 rounded-lg font-semibold bg-[#2DC6BE] text-white border-[#2DC6BE] text-[#2DC6BE] border-[#2DC6BE]">
-                        Follow
-                      </button>
-                      <button className="px-3 py-2 text-sm font-semibold border-2 rounded-lg font-semibold bg-[#2DC6BE] text-white border-[#2DC6BE] text-[#2DC6BE] border-[#2DC6BE]">
-                        +
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <p className="mb-4 text-left">
-                    Adipiscing sapien felis in semper porttitor massa senectus
-                    nunc. Non ac cursus nisl luctus diam dignissim. Cras
-                    tincidunt etiam morbi egestas. Adipiscing sapien felis in
-                    semper porttitor massa senectus nunc. Adipiscing sapien
-                    felis in semper porttitor massa senectus nunc.
-                  </p>
-                </div>
-              </div>
-              <div className="flex-col">
-                <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={Girl}
-                    alt={Girl}
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <div className="flex flex-1 items-center justify-between">
-                    {/* Left Content */}
-                    <div className="flex flex-col">
-                      <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold text-left">
-                          Madhulika Sharma
-                        </h3>
-                      </div>
-
-                      {/* Time */}
-                      <p className="flex items-center gap-3 text-sm text-gray-500 text-left">
-                        <span>@Madhu.lika</span>
-                        <span>12kFollowers</span>
-                        <span>252 Trips</span>
-                      </p>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <button className="w-[90px] px-3 py-2 text-sm font-semibold border-2 rounded-lg font-semibold bg-[#2DC6BE] text-white border-[#2DC6BE] text-[#2DC6BE] border-[#2DC6BE]">
-                        Follow
-                      </button>
-                      <button className="px-3 py-2 text-sm font-semibold border-2 rounded-lg font-semibold bg-[#2DC6BE] text-white border-[#2DC6BE] text-[#2DC6BE] border-[#2DC6BE]">
-                        +
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <p className="mb-4 text-left">
-                    Adipiscing sapien felis in semper porttitor massa senectus
-                    nunc. Non ac cursus nisl luctus diam dignissim. Cras
-                    tincidunt etiam morbi egestas. Adipiscing sapien felis in
-                    semper porttitor massa senectus nunc. Adipiscing sapien
-                    felis in semper porttitor massa senectus nunc.
-                  </p>
-                </div>
-              </div>
+            <div className="relative w-16 h-16 -mt-8 left-4 border-4 border-white rounded-full overflow-hidden">
+              <img
+                src="https://via.placeholder.com/150"
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
             </div>
-          )}
-        </>
-      ))}
+
+            <h5 className="font-poppins text-left text-[20px] font-semibold mt-1 text-[#212626]">
+              {profile.name}
+            </h5>
+            <p className="font-inter text-left text-[16px] text-[#667877] font-medium -mt-1">
+              {profile.username}
+            </p>
+            {profile.isInfluencer === 0 && (
+              <p className="bg-[#E5FFFE] w-[174px] h-[32px] font-inter font-medium text-left text-[12px] text-[#212626] my-2 rounded-full flex items-center justify-center">
+                {profile.role} • {profile.trips} Trips
+              </p>
+            )}
+            {profile.isInfluencer === 1 && (
+              <p className="bg-gradient-to-r from-[#1DB2AA] to-[#bae53da1] w-[174px] h-[32px] font-inter font-medium text-left text-[12px] text-[#212626] my-2 rounded-full flex items-center justify-center">
+                {profile.role} • {profile.trips} Trips
+              </p>
+            )}
+
+            <p className="font-inter font-medium text-left text-[#212626] text-[14px] mt-3 text-justify">
+              {profile.description}
+            </p>
+            {profile.isInfluencer === 0 && (
+              <div className="flex justify-center space-x-3 mt-4">
+                <button
+                  onClick={() => handleAddBuddyClick(index)}
+                  className={`w-full font-inter font-medium text-[14px] h-[36px] rounded-[4px] ${
+                    buddyStates[index]
+                      ? "bg-[#1DB2AA] text-white"
+                      : "bg-[#F0F7F7] text-[#667877]"
+                  }`}
+                >
+                  {buddyStates[index] ? "Added" : "Add as Buddy"}
+                </button>
+                <button
+                  onClick={() => handleFollowBuddyClick(index)}
+                  className={`w-full font-inter font-medium text-[14px] h-[36px] rounded-[4px] ${
+                    buddyFollow[index]
+                      ? "bg-[#1DB2AA] text-white"
+                      : "bg-[#F0F7F7] text-[#667877]"
+                  }`}
+                >
+                  {buddyFollow[index] ? "Following" : "Follow"}
+                </button>
+              </div>
+            )}
+
+            {profile.isInfluencer === 1 && (
+              <div className="flex justify-center space-x-3 mt-4">
+                <button
+                  onClick={() => handleIsInfluencerAddBuddyClick(index)}
+                  className={`w-full font-inter font-medium text-[14px] h-[36px] rounded-[4px] ${
+                    isInfluencerbuddyStates[index]
+                      ? "bg-gradient-to-r from-[#1DB2AA] to-[#bae53dcc] text-white"
+                      : "bg-gradient-to-r from-[#1db2aae0] to-[#bae53d6b] text-[#667877]"
+                  }`}
+                >
+                  {isInfluencerbuddyStates[index] ? "Added" : "Add as Buddy"}
+                </button>
+                <button
+                  onClick={() => handleIsInfluencerFollowBuddyClick(index)}
+                  className={`w-full font-inter font-medium text-[14px] h-[36px] rounded-[4px] ${
+                    isInfluencerbuddyFollow[index]
+                      ? "bg-gradient-to-r from-[#1DB2AA] to-[#bae53dcc] text-white"
+                      : "bg-gradient-to-r from-[#1db2aae0] to-[#bae53d6b] text-[#667877]"
+                  }`}
+                >
+                  {isInfluencerbuddyFollow[index] ? "Following" : "Follow"}
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import logo from "../../assets/headerIcon/logo.png";
 import Message from "../../assets/headerIcon/Message.png";
 import girl from "../../assets/headerIcon/girl.jpg";
@@ -18,6 +18,21 @@ const Header = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfile, setIsProfile] = useState(false);
+  const searchBarRef = useRef(null);
+
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+        setIsSearchActive(false); // Close dropdown if clicked outside
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const recentUsers = [
     { name: "Madhulika Gupta", img: girl },
@@ -52,13 +67,13 @@ const Header = () => {
     <>
       <header className="bg-white shadow-md sticky top-0 z-50 ">
         <div
-          className={`w-full max-w-[99%] container mx-auto px-3 ${
+          className={`w-full max-w-[99%] h-[80px] container mx-auto px-3 ${
             isSearchActive ? "" : "py-4"
           } flex items-center justify-between`}
         >
           {/* Left Section - Logo */}
           <div className="flex items-center">
-            <img src={logo} alt="TravSo Logo" className="h-8" />
+            <img src={logo} alt="TravSo Logo" className="h-10" />  
           </div>
 
           {/* Mobile Menu Toggle (Visible on Mobile) */}
@@ -88,13 +103,13 @@ const Header = () => {
               className={`block relative max-w-96 w-full ${
                 isSearchActive ? "shadow-lg py-4 px-2" : "px-2"
               }`}
+              ref={searchBarRef}
             >
               <input
                 type="text"
                 placeholder="Search..."
                 className="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 border-gray-300 focus:ring-2 focus:ring-[#FFFFFF] outline-none placeholder:text-sm"
-                onFocus={() => setIsSearchActive(true)}
-                onBlur={() => setIsSearchActive(false)}
+                onClick={() => setIsSearchActive(true)}
               />
               <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
                 <SearchIcon />

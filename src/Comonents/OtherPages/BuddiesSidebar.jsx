@@ -1,115 +1,275 @@
 import React, { useState } from "react";
-import First from "../../assets/PostImage/first.png";
-import Second from "../../assets/PostImage/second.png";
-import Third from "../../assets/PostImage/third.png";
-import Fourth from "../../assets/PostImage/fourth.png";
-import Fifth from "../../assets/PostImage/fifth.png";
-import Sixth from "../../assets/PostImage/sixth.png";
-import Seventh from "../../assets/PostImage/seventh.png";
-import Eighth from "../../assets/PostImage/eigth.png";
-import Ninth from "../../assets/PostImage/ninth.png";
-import Tenth from "../../assets/PostImage/first.png";
-
+import Girl from "../../assets/headerIcon/girl.jpg";
+import Boy1 from "../../assets/headerIcon/boy1.png";
+import Boy2 from "../../assets/headerIcon/boy2.jpg";
+import { useNavigate } from "react-router-dom";
 
 const BuddiesSidebar = () => {
-  const [posts, setPosts] = useState([
+  const navigate = useNavigate();
+
+  const [followers, setfollowers] = useState([
     {
       id: 1,
-      imageUrl: First,
-      title: "Post 1",
+      name: "Madhulika",
+      handle: "@Madhu.lika",
+      image: Girl,
+      follow: "Follow",
     },
     {
       id: 2,
-      imageUrl: Second,
-      title: "Post 2",
+      name: "Pankaj",
+      handle: "@Reet.Pankaj",
+      image: Boy1,
+      follow: "Following",
     },
     {
       id: 3,
-      imageUrl: Third,
-      title: "Post 3",
+      name: "Rishab",
+      handle: "@frontend",
+      image: Boy2,
+      follow: "Follow",
     },
     {
       id: 4,
-      imageUrl: Fourth,
-      title: "Post 4",
+      name: "Madhulika",
+      handle: "@Madhu.lika",
+      image: Boy1,
+      follow: "Following",
     },
     {
       id: 5,
-      imageUrl: Fifth,
-      title: "Post 5",
+      name: "Pankaj",
+      handle: "@Reet.Pankaj",
+      image: Girl,
+      follow: "Following",
     },
     {
       id: 6,
-      imageUrl: Sixth,
-      title: "Post 6",
-    },
-    {
-      id: 7,
-      imageUrl: Seventh,
-      title: "Post 7",
-    },
-    {
-      id: 8,
-      imageUrl: Eighth,
-      title: "Post 8",
-    },
-    {
-      id: 9,
-      imageUrl: Ninth,
-      title: "Post 9",
-    },
-    {
-      id: 10,
-      imageUrl: Tenth,
-      title: "Post 10",
-    },
-    {
-      id: 11,
-      imageUrl: Sixth,
-      title: "Post 11",
-    },
-    {
-      id: 12,
-      imageUrl: Seventh,
-      title: "Post 12",
+      name: "Rishab",
+      handle: "@frontend",
+      image: Boy2,
+      follow: "Following",
     },
   ]);
 
+  const [following, setfollowing] = useState([
+    {
+      id: 1,
+      name: "Madhulika",
+      handle: "@Madhu.lika",
+      image: Girl,
+      follow: "Follow",
+    },
+    {
+      id: 2,
+      name: "Pankaj",
+      handle: "@Reet.Pankaj",
+      image: Boy1,
+      follow: "Following",
+    },
+    {
+      id: 3,
+      name: "Rishab",
+      handle: "@frontend",
+      image: Boy2,
+      follow: "Follow",
+    },
+    {
+      id: 4,
+      name: "Madhulika",
+      handle: "@Madhu.lika",
+      image: Boy1,
+      follow: "Following",
+    },
+    {
+      id: 5,
+      name: "Pankaj",
+      handle: "@Reet.Pankaj",
+      image: Girl,
+      follow: "Following",
+    },
+    {
+      id: 6,
+      name: "Rishab",
+      handle: "@frontend",
+      image: Boy2,
+      follow: "Following",
+    },
+  ]);
 
   // State to toggle visibility of more posts
-  const [showAllPost, setShowAllPost] = useState(false);
+  const [showAllfollowers, setShowAllfollowers] = useState(false);
+  const [showAllfollowing, setShowAllfollowing] = useState(false);
+
+  const visiblePostsfollowes = showAllfollowers
+    ? followers
+    : followers.slice(0, 3);
+
+  const visiblePostsfollowing = showAllfollowing
+    ? following
+    : following.slice(0, 3);
 
 
-  // Show only first 9 posts or all posts based on state
-  const visiblePosts = showAllPost ? posts : posts.slice(0, 9);
+  const handleAllFollowers = () =>{
+    navigate("/followers")
+  }
 
+  const handleAllFollowing = () =>{
+    navigate("/following")
+  } 
 
   return (
-    <div className="flex flex-col">
-      <div className="w-[405px] bg-white rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.25)] p-5 mb-4">
+    <>
+      <div className="w-[340px] bg-white rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.15)] p-4 px-4 mb-4">
         <div className="flex justify-between items-center mb-2">
-          <h2 className="text-lg font-semibold">All Posts ({posts.length})</h2>
+          <h2 className="font-poppins font-semibold text-[20px] text-[#212626]">
+            Followers ({followers.length})
+          </h2>
           <p
-            onClick={() => setShowAllPost(!showAllPost)}
-            className="text-teal-800 cursor-pointer hover:underline text-sm"
+            onClick={handleAllFollowers}
+            className="font-inter font-medium text-[14px] text-[#2DC6BE] cursor-pointer hover:underline"
           >
-            {showAllPost ? "See Less" : "See All"}
+           See All
           </p>
         </div>
-        <div className="grid grid-cols-3 gap-3">
-          {/* Dynamically render images and titles */}
-          {visiblePosts.map((post) => (
-            <div key={post.id}>
-              <img
-                src={post.imageUrl}
-                alt={post.title}
-                className="w-full h-[130px] rounded-sm object-cover"
-              />
+        {/* User List */}
+        <div className="mt-4 space-y-4">
+          {visiblePostsfollowes.map((buddy) => (
+            <div key={buddy.id} className="flex items-center justify-between">
+              {/* User Info */}
+              <div className="flex items-center space-x-3">
+                <img
+                  src={buddy.image}
+                  alt={buddy.name}
+                  className="w-[44px] h-[44px] rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-inter font-medium text-[16px] text-[#212626] text-left">
+                    {buddy.name}
+                  </p>
+                  <p className="font-inter font-medium text-[14px] text-[#667877] text-left">
+                    {buddy.handle.length > 9
+                      ? `${buddy.handle.slice(0, 9)}...`
+                      : buddy.handle}
+                  </p>
+                </div>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex items-center space-x-2">
+                <button
+                  className={`w-[76px] h-[36px] text-[14px] border rounded-[4px] font-medium ${
+                    buddy.follow === "Follow"
+                      ? "bg-[#2DC6BE] text-white border-[#2DC6BE]"
+                      : "text-[#2DC6BE] border-[#2DC6BE]"
+                  }`}
+                >
+                  {buddy.follow}
+                </button>
+                <button
+                  className={`w-[36px] h-[36px] text-[20px] text-sm border rounded-[4px] font-medium bg-[#2DC6BE] text-white border-[#2DC6BE] flex items-center justify-center ${
+                    buddy.follow === "Follow"
+                      ? "bg-[#2DC6BE] text-white border-[#2DC6BE]"
+                      : "text-[#2DC6BE] border-[#2DC6BE]"
+                  }`}
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6.99984 1.16699V12.8337M1.1665 7.00033H12.8332"
+                      stroke="white"
+                      stroke-width="1.66667"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </div>
-    </div>
+
+      <div className="w-[340px] bg-white rounded-lg shadow-[0_4px_10px_rgba(0,0,0,0.15)] p-4 px-4 mb-4">
+        <div className="flex justify-between items-center mb-2">
+          <h2 className="font-poppins font-semibold text-[20px] text-[#212626]">
+            Following ({following.length})
+          </h2>
+          <p
+            onClick={handleAllFollowing}
+            className="font-inter font-medium text-[14px] text-[#2DC6BE] cursor-pointer hover:underline"
+          >
+            See All
+          </p>
+        </div>
+        {/* User List */}
+        <div className="mt-4 space-y-4">
+          {visiblePostsfollowing.map((buddy) => (
+            <div key={buddy.id} className="flex items-center justify-between">
+              {/* User Info */}
+              <div className="flex items-center space-x-3">
+                <img
+                  src={buddy.image}
+                  alt={buddy.name}
+                  className="w-[44px] h-[44px] rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-inter font-medium text-[16px] text-[#212626] text-left">
+                    {buddy.name}
+                  </p>
+                  <p className="font-inter font-medium text-[14px] text-[#667877] text-left">
+                    {buddy.handle.length > 9
+                      ? `${buddy.handle.slice(0, 9)}...`
+                      : buddy.handle}
+                  </p>
+                </div>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex items-center space-x-2">
+                <button
+                  className={`w-[76px] h-[36px] text-[14px] border rounded-[4px] font-medium ${
+                    buddy.follow === "Follow"
+                      ? "bg-[#2DC6BE] text-white border-[#2DC6BE]"
+                      : "text-[#2DC6BE] border-[#2DC6BE]"
+                  }`}
+                >
+                  {buddy.follow}
+                </button>
+                <button
+                  className={`w-[36px] h-[36px] text-[16px] border rounded-[4px] font-medium bg-[#2DC6BE] text-white border-[#2DC6BE] flex items-center justify-center ${
+                    buddy.follow === "Follow"
+                      ? "bg-[#2DC6BE] text-white border-[#2DC6BE]"
+                      : "text-[#2DC6BE] border-[#2DC6BE]"
+                  }`}
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6.99984 1.16699V12.8337M1.1665 7.00033H12.8332"
+                      stroke="white"
+                      stroke-width="1.66667"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 

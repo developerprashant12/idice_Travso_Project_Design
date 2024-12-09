@@ -105,10 +105,11 @@
     }
   }
   
-  @media (min-width: 768px) {
+  @media (min-width: 768px) and (max-width: 1024px) {
     .otp-input {
-      width: 4rem !important; /* md:w-16 */
+      width: 50px !important; /* md:w-16 */
       height: 3rem !important; /* md:h-12 */
     }
   }
   
+
